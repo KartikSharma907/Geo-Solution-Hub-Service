@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Geo Service Location Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../static/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+          crossorigin="" />
+
+
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+            integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+            crossorigin=""></script>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="../static/maps.js"></script>
+
+        <!-- JS, Popper.js, and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
+
+<link rel="stylesheet" href="../static/style.css">
+<script src="../static/response.js"></script>
+
+
+</head>
+<body>
+  <br>
+        <br>
+        <br>
+
+    <nav class="navbar navbar-expand-sm bg-dark fixed-top">
+
+    <ul class="navbar-nav">
+    <li class="nav-item" >
+         <img src="https://kizora.com/assets/image/images/kizora-logo.png"  style="background-color:black;width:45px;height:45px">
+    </li>
+    &emsp;&emsp;&emsp;
+
+
+    <div class="nav-item">
+        <form method="POST" action="/db">
+            <a class="nav-link" ><button class="navbar navbar-expand-sm bg-dark" style="float: right; color: white; font-size:25px; padding:0px; border:None;">Route History</button></a>
+        </form>
+    </div>
+        </ul>
+        </nav>
+
+    <br>
+
+        <div class="card-deck">
+            <div class="col-sm-3">
+		<div id="myform">
+		<h1><b>Find Route</b></h1>
+                <form class="inputform" id="myform1" method="POST" action="/">
+                <label for="start">Enter start point Address</label>
+                <input type="text" name="start_address" id="start_address" value="{{start_add}}" style="width:100%" required><br>
+
+                <label id="addstop" style="font-size:15px"> To Add Stops, click on '+' </label>
+                <input type="button" id="myButton1" name="add_stop_btn1" value="+" style="float: right"/>
+                <input type="button" id="myButton2" name="add_stop_btn2" value="+" style="float: right"/>
+                <input type="button" id="myButton3" name="add_stop_btn3" value="+" style="float: right"/>
+                <input type="button" id="myButton4" name="add_stop_btn4" value="+" style="float: right"/>
+                <input type="button" id="myButton5" name="add_stop_btn5" value="+" style="float: right"/>
+                <br>
+                <label for="end">Enter end point Address</label>
+                <input type="text" name="end_address"id="end_address" value="{{end_add}}" style="width:100%" required>
+<br>
+	<br>
+	<label> Mode of Travel: </label>
+     <select name="mode" id="select" class="btn btn-warning" required>
+        <option value="driving">Driving</option>
+        <option value="transit">Transit</option>
+        <option value="air_route">Air</option>
+        <option value="walking">Walking</option>
+    </select>
+    <br><br>
+    <div style="font-size: 20px;">
+     {% if distance1 %}
+      <label>Total Distance: </label>
+     {{distance1}} km,  {{ distance2 }} miles
+     {% endif %}
+
+     <br>
+     {% if duration %}
+     <label>Estimated Time: </label>
+     {{ duration }}
+     {% endif %}
+      {% if stop_add1 %}
+     <label style="float: center"><b>Stops: </b></label><br>
+     1.{{ stop_add1 }}
+     {% endif %}
+
+     {% if stop_add2 %}
+     &emsp;2.{{ stop_add2 }}
+     {% endif %}
+
+     {% if stop_add3 %}
+      &emsp;3.{{ stop_add3 }}
+     {% endif %}
+
+     {% if stop_add4 %}
+      &emsp;4.{{ stop_add4 }}
+     {% endif %}
+
+     {% if stop_add5 %}
+      &emsp;5.{{ stop_add5 }}
+     {% endif %}
+
+    </div>
+
+    <br>
+    <div class="container">
+    <Button class="btn btn-primary" id="button1" type="submit" style="float: left">Get Route</Button>
+  </div>
+  </form>
+  <div class="container">
+    <form method="POST" action="/geocoding/">
+        <a id="button1"><button class="btn btn-success" id="button2" style="float: right">Geo Coding</button></a>
+    </form>
+</div>
+
+        <br><br><br>
+
+
+            </div>
+	</div>
+
+    <div class="col-sm-8">
+        <div id="mapid" style="width: 110%; height: 100%"></div>
+    <div id="distancetravelled"></div>
+
+<script>
+var mymap = L.map('mapid').setView([24.18,82.78], 5);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}{r}.png', {
+           attribution: '© OpenStreetMap contributors'
+       }).addTo(mymap);
+</script>
+
+<script>
+
+var mode = "{{mode}}";
+
+if(mode == "air_route"){
+
+var marker = L.marker([{{lat1}},{{lng1}}], { title: "Start" }).addTo(mymap);
+var marker = L.marker([{{lat2}},{{lng2}}], { title: "End" }).addTo(mymap);
+var marker = L.marker([{{lat3}},{{lng3}}], { title: "Stop" }).addTo(mymap);
+var marker = L.marker([{{lat4}},{{lng4}}], { title: "Stop" }).addTo(mymap);
+var marker = L.marker([{{lat5}},{{lng5}}], { title: "Stop" }).addTo(mymap);
+var marker = L.marker([{{lat6}},{{lng6}}], { title: "Stop" }).addTo(mymap);
+var marker = L.marker([{{lat7}},{{lng7}}], { title: "Stop" }).addTo(mymap);
+
+
+var polyline = [[{{lat1}},{{lng1}}],[{{lat3}},{{lng3}}],[{{lat4}},{{lng4}}],[{{lat5}},{{lng5}}],[{{lat6}},{{lng6}}],[{{lat7}},{{lng7}}],[{{lat2}},{{lng2}}]];
+var line = L.polyline(polyline,{
+  color: 'red',
+  weight: 3,
+  opacity: 1
+}).addTo(mymap);
+}
+else{
+var control = L.Routing.control({
+     waypoints: [
+         L.latLng({{lat1}},{{lng1}}),
+         L.latLng({{lat3}},{{lng3}}),
+         L.latLng({{lat4}},{{lng4}}),
+         L.latLng({{lat5}},{{lng5}}),
+         L.latLng({{lat6}},{{lng6}}),
+         L.latLng({{lat7}},{{lng7}}),
+         L.latLng({{lat2}},{{lng2}})
+     ],
+     routeWhileDragging: false
+ }).addTo(mymap);
+
+console.log(control);
+}
+
+</script>
+
+    </div>
+
+    </div>
+
+</body>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link rel="stylesheet" href="../static/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css">
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+
+
+    <script src="../static/response.js"></script>
+
+
+</head>
+<body style="font-family: serif; font-size: 20px;">
+  <br>
+<br>
+
+  <h1 ><b>Database</b></h1><br><br>
+<script>
+$(document).ready(function() {
+  $('#table-demo').DataTable();
+});
+  </script>
+
+  <div>
+    <table class="table" id="table-demo">
+    <thead class="table-danger" style="background-color: pink">
+      <tr>
+        <th>ID</th>
+        <th>IP Address</th>
+        <th>Start Location</th>
+        <th>End Location</th>
+        <th>Start Latitude</th>
+        <th>Start Longitude</th>
+        <th>End Latitude</th>
+        <th>End Longitude</th>
+        <th>Distance</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for row in results %}
+    <tr>
+      <td> {{ row[0] }} </td>
+        <td> {{ row[1] }} </td>
+          <td> {{ row[2] }} </td>
+            <td> {{ row[3] }} </td>
+              <td> {{ row[4] }} </td>
+                <td> {{ row[5] }} </td>
+                  <td> {{ row[6] }} </td>
+                    <td> {{ row[7] }} </td>
+                      <td> {{ row[8] }} </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  </div>
+
+</body>
+</html>
