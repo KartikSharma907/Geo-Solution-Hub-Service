@@ -1,0 +1,75 @@
+
+.nav-item {
+    font-size: 25px;
+}
+.nav-link{
+	color: white;
+}
+h1 {
+    text-align: center;
+    font-family: inherit;
+    font-size: 25px;
+    margin: 20px;
+}
+
+
+.inputform {
+
+    margin-top: 35px;
+    font-family: serif;
+    font-size: 25px;
+
+}
+
+#myBtn1,#myBtn2,#myBtn3,#linkbtn {
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    width: 200px;
+    height: inherit;
+    margin: 5px;
+    font-size:15px;
+    border-radius: 20px;
+}
+
+
+
+#select {
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 15px;
+
+}
+
+
+.dropdown {
+    font-size:25px;
+}
+
+
+
+
+#button {
+
+	display:block;
+	margin: auto;
+	font-size: 25px;
+	border-radius: 15%;
+	padding: 10px;
+
+}
+
+#button1, #button2{
+	font-size: 20px;
+	margin: auto;
+	display: block;
+}
+
+#myform {
+	text-align:center;
+}
+
+h2 {
+	text-align: center;
+
+}
